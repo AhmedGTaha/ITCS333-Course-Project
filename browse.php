@@ -1,4 +1,10 @@
-<?php ?>
+
+
+<?php
+        include ("db.php");
+        session_start();  
+?>  
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,28 +16,44 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <title>IT College Room Booking System</title>
+    <title>Browse Rooms</title>
     <style>
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
         background-color: #f9f9f9;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+      }
+      main {
+        flex: 1;
       }
       header {
         background-color: #ffffff;
         padding: 30px 0;
         border-bottom: 1px solid #ddd;
       }
+      #rooms {
+        padding: 40px 0;
+        background-color: #ffffff;
+      }
       .card {
         border: 1px solid #ddd;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s;
+        transition: transform 0.3s, box-shadow 0.3s;
       }
       .card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-10px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       }
       footer {
         background-color: #333;
         color: #f9f9f9;
+        text-align: center;
+        padding: 10px 0;
       }
       .btn-primary {
         background-color: #6c757d;
@@ -40,184 +62,168 @@
       .btn-primary:hover {
         background-color: #5a6268;
       }
-      .user-card {
-        background-color: white;
+      .search-bar {
+        max-width: 600px;
+        margin: 20px auto 60px; /* Adjusted spacing for better positioning */
+      }
+      .search-bar input[type="search"] {
+        border-radius: 20px;
         border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        text-align: center;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: box-shadow 0.3s;
       }
-      .user-card img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 15px;
+      .search-bar input[type="search"]:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
       }
-      .user-card h5 {
-        margin-bottom: 10px;
-        color: #333;
+      .search-bar .btn {
+        border-radius: 20px;
+        padding: 8px 20px;
       }
-      .user-card p {
-        font-size: 0.9rem;
-        color: #666;
-        margin-bottom: 15px;
-      }
-      .user-card .btn {
-        font-size: 0.85rem;
-      }
-      #rooms {
-    padding: 40px 0;
-    background-color: #f8f9fa;
-    margin-bottom: 50px; /* Adds spacing */
-  }
     </style>
   </head>
   <body>
     <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-    <div class="container-fluid">
-      <!-- Brand Logo -->
-      <a class="navbar-brand" href="index.php">
-        <img
-          src="https://incubator.uob.edu.bh/wp-content/uploads/2022/11/LOGO_Final_S-1-e1669184877957.png"
-          height="30"
-          alt="UOB Logo"
-          loading="lazy"
-        />
-        IT Room Booking
-      </a>
-      <!-- Navbar Toggle Button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Navbar Links and Dropdown -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.php">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="browse.php">Browse Rooms</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.php">About</a>
-          </li>
-        </ul>
-        <!-- Profile Dropdown -->
-        <div class="dropdown ms-3">
-          <a
-            class="dropdown-toggle d-flex align-items-center"
-            href="#"
-            id="profileDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <img
-              src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
-              class="rounded-circle"
-              height="25"
-              alt="Profile Avatar"
-              loading="lazy"
-            />
-          </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="profileDropdown"
-          >
-            <li>
-              <a class="dropdown-item" href="profile.php">My Profile</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="Home.php">
+          <img
+            src="https://incubator.uob.edu.bh/wp-content/uploads/2022/11/LOGO_Final_S-1-e1669184877957.png"
+            height="30"
+            alt="UOB Logo"
+            loading="lazy"
+          />
+          IT Room Booking
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="Home.php">Home</a>
             </li>
-            <li>
-              <a class="dropdown-item" href="userRooms.php">My Rooms</a>
+            <li class="nav-item">
+              <a class="nav-link" href="browse.php">Browse Rooms</a>
             </li>
-            <li><a class="dropdown-item" href="#">Logout</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.php">About</a>
+            </li>
           </ul>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Header -->
-  <header class="text-center">
-    <div class="container">
-      <h1>Browse Rooms</h1>
-      <p class="lead">Explore and book your preferred rooms</p>
-    </div>
-  </header>
-
-  <!-- Search Bar -->
-  <div class="container my-4">
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter room number (e.g., 101)"
-      />
-      <button class="btn btn-primary">Search</button>
-    </div>
-    <p class="text-center text-danger mt-3">No rooms found matching your search.</p>
-  </div>
-
-  <!-- Search Result Section -->
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Room 101</h5>
-            <p>Capacity: 25 | Equipment: Smartboard</p>
-            <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-            <a href="details.php" class="btn btn-primary">View Details</a>
+          <div class="dropdown">
+            <a
+              class="dropdown-toggle d-flex align-items-center"
+              href="#"
+              id="profileDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="<?php echo $_SESSION['profile_picture'] ?? 'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'; ?>"
+                class="rounded-circle"
+                height="25"
+                alt="Profile Avatar"
+                loading="lazy"
+              />
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item" href="profile.php">My Profile</a></li>
+              <li><a class="dropdown-item" href="history.php">My Rooms</a></li>
+              <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </nav>
 
-  <!-- All Rooms Section -->
-  <section id="rooms" class="mt-5">
-    <div class="container">
-      <h3 class="text-center mb-4">All Available Rooms</h3>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <!-- Room 1 -->
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Room 101</h5>
-              <p>Capacity: 25 | Equipment: Smartboard</p>
-              <p>Available Time: 10:00 - 10:50 | Status: booked</p>
-              <a href="details.php" class="btn btn-primary">View Details</a>
+    <main>
+      <!-- Header -->
+      <header class="text-center">
+        <div class="container">
+          <h1>Browse Rooms</h1>
+          <p class="lead">Explore and book your preferred rooms</p>
+        </div>
+      </header>
+
+
+      <!-- Search Bar -->
+      <div class="search-bar text-center">
+        <form class="d-flex justify-content-center" role="search" method="post" action="browse.php">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search for rooms"
+            aria-label="Search"
+            name="roomid"
+          />
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+
+      <!-- Browse Rooms Section -->
+      <section id="rooms">
+        <div class="container">
+          <h3 class="text-center mb-4">Available Rooms</h3>
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+
+          <?php 
+             
+            $sql = "Select * from Room";
+            if ($_SERVER["REQUEST_METHOD"] == "POST")
+            {
+              $roomid = $_POST['roomid'];
+              if(!empty($roomid))
+              {
+                $sql = "Select * from Room where RoomID='$roomid'";
+              }
+            }
+
+    
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $rooms = $stmt->fetchAll();
+            foreach($rooms as $room)
+             {
+          ?>
+          
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Room <?php echo $room['RoomID'] ?></h5>
+                  <p class="card-text">
+                    Capacity: <?php echo $room['capacity'] ?> | Equipment: <?php echo $room['equipment'] ?> <br>
+                  </p>
+                  <form action="viewDetails.php" method="GET">
+                  <input type="hidden" name="RoomID" value="<?php echo $room['RoomID']; ?>">
+                  <button class="btn btn-primary" type="submit">View Details</button>
+                  </form>
+                </div>
+              </div>
             </div>
+            <?php
+
+             }
+           ?>
+            <!-- Additional rooms (unchanged for brevity) -->
           </div>
         </div>
-        <!-- Room 2 -->
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Room 102</h5>
-              <p>Capacity: 25 | Equipment: Smartboard</p>
-              <p>Available Time: 10:00 - 10:50 | Status: Available</p>
-              <a href="details.php" class="btn btn-primary">View Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
+          
+      </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="text-center py-3">
+    <footer>
       <p>&copy; 2024 IT College Room Booking System | All Rights Reserved</p>
     </footer>
 
@@ -228,3 +234,5 @@
     ></script>
   </body>
 </html>
+
+
