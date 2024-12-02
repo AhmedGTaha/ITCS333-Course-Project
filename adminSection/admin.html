@@ -12,11 +12,8 @@
     <title>Admin Dashboard - IT College Room Booking System</title>
     <style>
       body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background-color: #f9f9f9;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
       }
 
       .sidebar {
@@ -51,14 +48,6 @@
         padding: 30px;
       }
 
-      footer {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 20px;
-        margin-top: 50px;
-      }
-
       .card {
         border: 1px solid #ddd;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -79,20 +68,21 @@
         background-color: #5a6268;
       }
 
-      .table th,
-      .table td {
-        vertical-align: middle;
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 50px;
       }
 
-      .form-control:focus {
-        border-color: #6c757d;
-        box-shadow: none;
-      }
-
-      .stat-card .card-body {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      .user-card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
       }
 
       .user-card img {
@@ -113,115 +103,81 @@
         color: #666;
         margin-bottom: 15px;
       }
+
+      .user-card .btn {
+        font-size: 0.85rem;
+      }
     </style>
   </head>
 
   <body>
     <!-- Sidebar -->
     <div class="sidebar">
-      <h3 class="text-white">Admin Dashboard</h3>
+      <a href="admin.html"><h3 class="text-white">Admin Dashboard</h3></a>
       <a href="admin.html">Home</a>
       <a href="allRooms.html">All Rooms</a>
       <a href="allUsers.html">All Users</a>
       <a href="userBookings.html">User Bookings</a>
+      <a href="adminProfile.html">Edit Profile</a>
     </div>
 
     <!-- Content Area -->
     <div class="content-area">
-      <!-- Header -->
-      <header class="text-center mb-4">
-        <h1>Admin Dashboard</h1>
-        <p class="lead">Manage the system, rooms, users, and more.</p>
+      <!-- Welcome Section -->
+      <header class="text-center mb-5">
+        <h1>Welcome, Admin!</h1>
+        <p class="lead">Easily manage rooms, users, and bookings.</p>
       </header>
 
-      <!-- Stats Section -->
-      <div class="row mb-4">
-        <div class="col-md-4">
-          <div class="card stat-card">
-            <div class="card-body">
-              <h5 class="card-title">Total Bookings</h5>
-              <p class="card-text">150</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card stat-card">
-            <div class="card-body">
-              <h5 class="card-title">Total Users</h5>
-              <p class="card-text">250</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card stat-card">
-            <div class="card-body">
-              <h5 class="card-title">Available Rooms</h5>
-              <p class="card-text">5</p>
-            </div>
+      <!-- User Card -->
+      <div class="container my-5">
+        <div class="user-card">
+          <img
+            src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
+            alt="User Avatar"
+          />
+          <h5>Good Morning, Ahmed Taha</h5>
+          <p>ID: 202203742</p>
+          <hr />
+          <div class="d-flex gap-2 justify-content-center mt-3">
+            <a href="adminProfile.html" class="btn btn-outline-primary btn-sm">Edit Profile</a>
+            <a href="userBookings.html" class="btn btn-outline-secondary btn-sm">Bookings</a>
+            <a href="allRooms.html" class="btn btn-outline-secondary btn-sm">Rooms</a>
+            <a href="allUsers.html" class="btn btn-outline-secondary btn-sm">Users</a>
+            <a href="#" class="btn btn-outline-danger btn-sm">Logout</a>
           </div>
         </div>
       </div>
 
-      <!-- Room Management Section -->
-      <div class="mb-4">
-        <h3>Manage Rooms</h3>
-        <div class="row mb-4">
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Add New Room</h5>
-                <form>
-                  <div class="mb-3">
-                    <label for="roomName" class="form-label">Room Name</label>
-                    <input type="text" class="form-control" id="roomName" placeholder="Room 101" />
-                  </div>
-                  <div class="mb-3">
-                    <label for="roomName" class="form-label">Availability Time</label>
-                    <input type="text" class="form-control" id="roomName" placeholder="10:00 - 10:50" />
-                  </div>
-                  <div class="mb-3">
-                    <label for="roomCapacity" class="form-label">Room Capacity</label>
-                    <input type="number" class="form-control" id="roomCapacity" placeholder="25" />
-                  </div>
-                  <div class="mb-3">
-                    <label for="roomEquipment" class="form-label">Room Equipment</label>
-                    <input type="text" class="form-control" id="roomEquipment" placeholder="Smartboard, Projector" />
-                  </div>
-                  <button type="submit" class="btn btn-primary">Add Room</button>
-                </form>
-              </div>
+      <!-- Stats Section -->
+      <div class="row mb-5">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title">Total Bookings</h5>
+              <p class="card-text fs-4">150</p>
             </div>
           </div>
-
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Edit Room</h5>
-                <form>
-                    <div class="mb-3">
-                        <label for="roomName" class="form-label">Room Name</label>
-                        <input type="text" class="form-control" id="roomName" placeholder="Room 101" />
-                      </div>
-                      <div class="mb-3">
-                        <label for="roomName" class="form-label">Availability Time</label>
-                        <input type="text" class="form-control" id="roomName" placeholder="10:00 - 10:50" />
-                      </div>
-                      <div class="mb-3">
-                        <label for="roomCapacity" class="form-label">Room Capacity</label>
-                        <input type="number" class="form-control" id="roomCapacity" placeholder="25" />
-                      </div>
-                      <div class="mb-3">
-                        <label for="roomEquipment" class="form-label">Room Equipment</label>
-                        <input type="text" class="form-control" id="roomEquipment" placeholder="Smartboard, Projector" />
-                      </div>
-                  <button type="submit" class="btn btn-primary">Update Room</button>
-                </form>
-              </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title">Total Users</h5>
+              <p class="card-text fs-4">250</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title">Available Rooms</h5>
+              <p class="card-text fs-4">5</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
