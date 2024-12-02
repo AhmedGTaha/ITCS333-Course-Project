@@ -1,4 +1,11 @@
-<?php ?>
+<?php
+
+session_start();
+include("db.php");
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -79,7 +86,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
       <!-- Brand Logo -->
-      <a class="navbar-brand" href="index.php">
+      <a class="navbar-brand" href="Home.php">
         <img
           src="https://incubator.uob.edu.bh/wp-content/uploads/2022/11/LOGO_Final_S-1-e1669184877957.png"
           height="30"
@@ -104,7 +111,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="index.php">Home</a>
+            <a class="nav-link active" href="Home.php">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="browse.php">Browse Rooms</a>
@@ -124,7 +131,7 @@
             aria-expanded="false"
           >
             <img
-              src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
+              src="<?php echo $_SESSION['profile_picture'] ?? 'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'; ?>"
               class="rounded-circle"
               height="25"
               alt="Profile Avatar"
@@ -139,9 +146,9 @@
               <a class="dropdown-item" href="profile.php">My Profile</a>
             </li>
             <li>
-              <a class="dropdown-item" href="userRooms.php">My Rooms</a>
+              <a class="dropdown-item" href="userRooms.html">My Rooms</a>
             </li>
-            <li><a class="dropdown-item" href="#">Logout</a></li>
+            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
           </ul>
         </div>
       </div>
@@ -161,61 +168,72 @@
     <div class="container my-5">
       <div class="user-card">
         <img
-          src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
+          src="<?php echo $_SESSION['profile_picture'] ?? 'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'; ?>"
           alt="User Avatar"
         />
-        <h5>Good Morning, Ahmed Taha</h5>
-        <p>ID: 202203742</p>
+        <h5>Hello, <?php echo $_SESSION['name']?></h5>
+        <p>Email: <?php echo $_SESSION['email']?></p>
         <hr />
-        <p>Active Bookings: <strong>3</strong></p>
-        <p>Total Bookings: <strong>10</strong></p>
+       
         <div class="d-flex gap-2 justify-content-center mt-3">
           <a href="profile.php" class="btn btn-outline-primary btn-sm">Edit Profile</a>
-          <a href="userRooms.php" class="btn btn-outline-secondary btn-sm">My Bookings</a>
-          <a href="#" class="btn btn-outline-danger btn-sm">Logout</a>
+          <a href="userRooms.html" class="btn btn-outline-secondary btn-sm">My Bookings</a>
+          <a href="logout.php" class="btn btn-outline-danger btn-sm">Logout</a>
         </div>
       </div>
     </div>
-
-    <!-- Featured Rooms Section -->
+    
     <section id="rooms">
       <div class="container">
         <h3 class="text-center mb-4">Currently Booked Rooms</h3>
         <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        <?php 
+         
+         $email = $_SESSION['email'];
+         $currentDate = date('Y-m-d');
+         $time = date("h:i:s");
+         try
+         {
+           $sql = "SELECT * FROM book,users,room,availabletimeslots WHERE users.Email = book.Email AND room.RoomID = availabletimeslots.RoomID AND availabletimeslots.ATID = book.ATID AND users.Email = '$email'";
+           $statment = $conn->prepare($sql);
+           $statment->execute();
+           $books = $statment->fetchAll();
+          
+           foreach($books as $book)
+          {
+        ?>
           <div class="col">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Room 101</h5>
-                <p>Capacity: 25 | Equipment: Smartboard</p>
-                <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-                <a href="details.php" class="btn btn-primary">Cancel Now</a>
+                <h5 class="card-title">Room <?php echo $book['RoomID'] ?></h5>
+                <p>Capacity:<?php echo $book['capacity'] ?> | Equipment: <?php echo $book['equipment'] ?></p>
+                <p>Available Time: <?php echo $book['start'] ?> - <?php echo $book['end'] ?></p>
+                <form action="cancelBooking.php" method="post">
+                    <input type="hidden" name="rid" value="<?php echo $book['requestID']?>"> <!-- Replace with dynamic booking ID -->
+                    <button type="submit" class="btn btn-primary">Cancel Now</button>
+                </form>
               </div>
             </div>
           </div>
+
+          <?php
+          }
+
+        }catch(PDOException $e) 
+        {
+            echo $sql . "<br>" . $e->getMessage();
+        }
+          ?>
           <!-- Repeat similar room cards -->
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Room 102</h5>
-                <p>Capacity: 25 | Equipment: Smartboard</p>
-                <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-                <a href="details.php" class="btn btn-primary">Cancel Now</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Room 103</h5>
-                <p>Capacity: 25 | Equipment: Smartboard</p>
-                <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-                <a href="details.php" class="btn btn-primary">Cancel Now</a>
-              </div>
-            </div>
-          </div>
+        
+          
         </div>
       </div>
     </section>
+
+          
+        
 
     <!-- Footer -->
     <footer class="text-center py-3">
@@ -226,6 +244,38 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
-    ></script>
+    >
+     
+    </script>
+
+<?php 
+     
+     if(isset($_SESSION['deleted']))
+     {
+       if($_SESSION['deleted'] == true)
+       {
+         echo "<script>alert('you deletion completed')</script>";
+       }else
+       {
+         echo "<script>alert('you deletion is not completed')</script>";
+       }
+     } 
+
+     unset($_SESSION['deleted']);
+    
+
+     if(isset($_SESSION['status']))
+     {
+         $msg = $_SESSION['status'];
+         echo "<script>alert('$msg')</script>";
+
+     } 
+
+     unset($_SESSION['status']);
+    
+
+?>
+
+
   </body>
 </html>
