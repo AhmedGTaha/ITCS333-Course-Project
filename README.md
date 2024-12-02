@@ -5,7 +5,7 @@ Welcome to the **IT College Room Booking System** repository. This project was d
 ## Project Members
 - **[Ahmed Taha - 202203742]**
 - **[Ammar Osama - 202206744]**
-- **[Member 3 Name]**
+- **[Hassan Mahmood Alaradi - 202208051]**
 
 ## Project Description
 
