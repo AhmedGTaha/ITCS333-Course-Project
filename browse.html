@@ -103,16 +103,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
+            <a class="nav-link" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="browse.html">Browse Rooms</a>
+            <a class="nav-link active" href="browse.html">Browse Rooms</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="about.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="admin.html">Admin</a>
           </li>
         </ul>
         <!-- Profile Dropdown -->
@@ -149,75 +146,74 @@
       </div>
     </div>
   </nav>
-  
 
-    <!-- Header -->
-    <header class="text-center">
-      <div class="container">
-        <h1>Welcome to IT College Room Booking System</h1>
-        <p class="lead">Easily book and manage your rooms</p>
-      </div>
-    </header>
+  <!-- Header -->
+  <header class="text-center">
+    <div class="container">
+      <h1>Browse Rooms</h1>
+      <p class="lead">Explore and book your preferred rooms</p>
+    </div>
+  </header>
 
-    <!-- User Card -->
-    <div class="container my-5">
-      <div class="user-card">
-        <img
-          src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
-          alt="User Avatar"
-        />
-        <h5>Good Morning, Ahmed Taha</h5>
-        <p>ID: 202203742</p>
-        <hr />
-        <p>Active Bookings: <strong>3</strong></p>
-        <p>Total Bookings: <strong>10</strong></p>
-        <div class="d-flex gap-2 justify-content-center mt-3">
-          <a href="profile.html" class="btn btn-outline-primary btn-sm">Edit Profile</a>
-          <a href="userRooms.html" class="btn btn-outline-secondary btn-sm">My Bookings</a>
-          <a href="#" class="btn btn-outline-danger btn-sm">Logout</a>
+  <!-- Search Bar -->
+  <div class="container my-4">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter room number (e.g., 101)"
+      />
+      <button class="btn btn-primary">Search</button>
+    </div>
+    <p class="text-center text-danger mt-3">No rooms found matching your search.</p>
+  </div>
+
+  <!-- Search Result Section -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Room 101</h5>
+            <p>Capacity: 25 | Equipment: Smartboard</p>
+            <p>Available Time: 10:00 - 10:50 | Status: Available</p>
+            <a href="details.html" class="btn btn-primary">Book Now</a>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Featured Rooms Section -->
-    <section id="rooms">
-      <div class="container">
-        <h3 class="text-center mb-4">Currently Booked Rooms</h3>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Room 101</h5>
-                <p>Capacity: 25 | Equipment: Smartboard</p>
-                <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-                <a href="details.html" class="btn btn-primary">Cancel Now</a>
-              </div>
+  <!-- All Rooms Section -->
+  <section id="rooms" class="mt-5">
+    <div class="container">
+      <h3 class="text-center mb-4">All Available Rooms</h3>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <!-- Room 1 -->
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Room 101</h5>
+              <p>Capacity: 25 | Equipment: Smartboard</p>
+              <p>Available Time: 10:00 - 10:50 | Status: Available</p>
+              <a href="details.html" class="btn btn-primary">Book Now</a>
             </div>
           </div>
-          <!-- Repeat similar room cards -->
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Room 102</h5>
-                <p>Capacity: 25 | Equipment: Smartboard</p>
-                <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-                <a href="details.html" class="btn btn-primary">Cancel Now</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Room 103</h5>
-                <p>Capacity: 25 | Equipment: Smartboard</p>
-                <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-                <a href="details.html" class="btn btn-primary">Cancel Now</a>
-              </div>
+        </div>
+        <!-- Room 2 -->
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Room 102</h5>
+              <p>Capacity: 25 | Equipment: Smartboard</p>
+              <p>Available Time: 10:00 - 10:50 | Status: Available</p>
+              <a href="details.html" class="btn btn-primary">Book Now</a>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- Footer -->
     <footer class="text-center py-3">
