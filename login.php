@@ -1,3 +1,4 @@
+<?php ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,7 +55,7 @@
           <button type="submit" class="btn btn-primary">Login</button>
         </div>
         <p class="text-center mt-3">
-          Don't have an account? <a href="register.html">Register here</a>.
+          Don't have an account? <a href="register.php">Register here</a>.
         </p>
       </form>
     </div>
