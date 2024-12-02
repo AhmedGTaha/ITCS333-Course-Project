@@ -6,7 +6,6 @@ Welcome to the **IT College Room Booking System** repository. This project was d
 - **[Ahmed Taha - 202203742]**
 - **[Ammar Osama - 202206744]**
 - **[Member 3 Name]**
-- **[Member 4 Name]**
 
 ## Project Description
 
