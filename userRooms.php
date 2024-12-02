@@ -1,3 +1,4 @@
+<?php ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,7 +53,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="index.php">
           <img
             src="https://incubator.uob.edu.bh/wp-content/uploads/2022/11/LOGO_Final_S-1-e1669184877957.png"
             height="30"
@@ -76,13 +77,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="browse.html">Browse Rooms</a>
+              <a class="nav-link" href="browse.php">Browse Rooms</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
+              <a class="nav-link" href="about.php">About</a>
             </li>
           </ul>
           <div class="dropdown">
@@ -103,8 +104,8 @@
               />
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-              <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-              <li><a class="dropdown-item" href="userRooms.html">My Rooms</a></li>
+              <li><a class="dropdown-item" href="profile.php">My Profile</a></li>
+              <li><a class="dropdown-item" href="userRooms.php">My Rooms</a></li>
               <li><a class="dropdown-item" href="#">Logout</a></li>
             </ul>
           </div>
@@ -137,7 +138,7 @@
                   <h6>Room Details:</h6>
                   <p>Capacity: 25 | Equipment: Smartboard</p>
                   <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-                  <a href="details.html" class="btn btn-primary">View Details</a>
+                  <a href="details.php" class="btn btn-primary">View Details</a>
                 </p>
               </div>
             </div>
@@ -154,7 +155,7 @@
                   <h6>Room Details:</h6>
                   <p>Capacity: 30 | Equipment: Projector</p>
                   <p>Available Time: 1:00 - 1:50 | Status: Available</p>
-                  <a href="details.html" class="btn btn-primary">View Details</a>
+                  <a href="details.php" class="btn btn-primary">View Details</a>
                 </p>
               </div>
             </div>

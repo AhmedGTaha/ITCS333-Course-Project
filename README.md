@@ -3,7 +3,6 @@
 Welcome to the **IT College Room Booking System** repository. This project was developed as part of the **ITCS333** course. The system provides an easy-to-use platform for students and faculty to browse, reserve, and manage room bookings within the IT College.
 
 ## Project Members
-
 - **[Ahmed Taha - 202203742]**
 - **[Ammar Osama - 202206744]**
 - **[Member 3 Name]**
