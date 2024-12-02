@@ -1,3 +1,4 @@
+<?php ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -78,7 +79,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
       <!-- Brand Logo -->
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="index.php">
         <img
           src="https://incubator.uob.edu.bh/wp-content/uploads/2022/11/LOGO_Final_S-1-e1669184877957.png"
           height="30"
@@ -103,13 +104,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
+            <a class="nav-link active" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="browse.html">Browse Rooms</a>
+            <a class="nav-link" href="browse.php">Browse Rooms</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" href="about.php">About</a>
           </li>
         </ul>
         <!-- Profile Dropdown -->
@@ -135,10 +136,10 @@
             aria-labelledby="profileDropdown"
           >
             <li>
-              <a class="dropdown-item" href="profile.html">My Profile</a>
+              <a class="dropdown-item" href="profile.php">My Profile</a>
             </li>
             <li>
-              <a class="dropdown-item" href="userRooms.html">My Rooms</a>
+              <a class="dropdown-item" href="userRooms.php">My Rooms</a>
             </li>
             <li><a class="dropdown-item" href="#">Logout</a></li>
           </ul>
@@ -169,8 +170,8 @@
         <p>Active Bookings: <strong>3</strong></p>
         <p>Total Bookings: <strong>10</strong></p>
         <div class="d-flex gap-2 justify-content-center mt-3">
-          <a href="profile.html" class="btn btn-outline-primary btn-sm">Edit Profile</a>
-          <a href="userRooms.html" class="btn btn-outline-secondary btn-sm">My Bookings</a>
+          <a href="profile.php" class="btn btn-outline-primary btn-sm">Edit Profile</a>
+          <a href="userRooms.php" class="btn btn-outline-secondary btn-sm">My Bookings</a>
           <a href="#" class="btn btn-outline-danger btn-sm">Logout</a>
         </div>
       </div>
@@ -187,7 +188,7 @@
                 <h5 class="card-title">Room 101</h5>
                 <p>Capacity: 25 | Equipment: Smartboard</p>
                 <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-                <a href="details.html" class="btn btn-primary">Cancel Now</a>
+                <a href="details.php" class="btn btn-primary">Cancel Now</a>
               </div>
             </div>
           </div>
@@ -198,7 +199,7 @@
                 <h5 class="card-title">Room 102</h5>
                 <p>Capacity: 25 | Equipment: Smartboard</p>
                 <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-                <a href="details.html" class="btn btn-primary">Cancel Now</a>
+                <a href="details.php" class="btn btn-primary">Cancel Now</a>
               </div>
             </div>
           </div>
@@ -208,7 +209,7 @@
                 <h5 class="card-title">Room 103</h5>
                 <p>Capacity: 25 | Equipment: Smartboard</p>
                 <p>Available Time: 10:00 - 10:50 | Status: Booked</p>
-                <a href="details.html" class="btn btn-primary">Cancel Now</a>
+                <a href="details.php" class="btn btn-primary">Cancel Now</a>
               </div>
             </div>
           </div>
