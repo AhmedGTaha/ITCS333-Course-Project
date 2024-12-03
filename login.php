@@ -26,7 +26,7 @@ if (isset($_SESSION['Email'])) {
                     echo "your register is completed successfully";
                 echo "</div>";
             }
-
+             //New:  Add error massege 
             if(isset($_SESSION['login_error']))
             {
                 echo "<div class='alert alert-danger' role='alert'>" ;
