@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['Email'])) {
-    header("Location: student.php");
+    header("Location: Home.php");
     exit();
 }
 ?>
