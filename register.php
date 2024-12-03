@@ -19,6 +19,17 @@ session_start();
                 <h4>Register</h4>
             </div>
             <div class="card-body">
+            <?php
+            //New:  Add Error for Rigester massege 
+            if(isset($_SESSION['error_register']))
+            {
+                echo "<div class='alert alert-danger' role='alert'>" ;
+                    echo $_SESSION['error_register'];
+                echo "</div>";
+                unset($_SESSION['error_register']);
+            }
+
+           ?>
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <!-- UOB Email Field -->
                     <div class="mb-3">
