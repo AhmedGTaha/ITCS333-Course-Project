@@ -18,6 +18,24 @@ if (isset($_SESSION['Email'])) {
 <body class="bg-light">
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+        <?php
+            //New:  Add success massege 
+            if(isset($_SESSION['registration_success']))
+            {
+                echo "<div class='alert alert-success' role='alert'>" ;
+                    echo "your register is completed successfully";
+                echo "</div>";
+            }
+
+            if(isset($_SESSION['login_error']))
+            {
+                echo "<div class='alert alert-danger' role='alert'>" ;
+                    echo $_SESSION['login_error'];
+                echo "</div>";
+                unset($_SESSION['login_error']);
+            }
+
+        ?>
             <h2 class="text-center mb-4">Login</h2>
             <form action="login_process.php" method="POST">
                 <div class="mb-3">
