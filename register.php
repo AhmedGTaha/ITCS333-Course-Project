@@ -26,7 +26,7 @@ include('db.php'); // Database connection
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">UOB Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="12345678@stu.uob.edu.bh" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="123456789@stu.uob.edu.bh" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
