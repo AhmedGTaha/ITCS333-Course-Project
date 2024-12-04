@@ -118,16 +118,7 @@
 
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
-        <a href="admin.php">
-            <h3 class="text-white">Admin Dashboard</h3>
-        </a>
-        <a href="admin.php">Home</a>
-        <a href="allRooms.php">All Rooms</a>
-        <a href="allUsers.php">All Users</a>
-        <a href="userBookings.php">User Bookings</a>
-        <a href="adminProfile.php">Edit Profile</a>
-    </div>
+    <?php include ("sidebar.php") ?>
 
     <!-- Content Area -->
     <div class="content-area">
@@ -145,10 +136,6 @@
                 <h2 class="text-center">Add New Room</h2>
                 <form>
                     <div class="mb-3">
-                        <label for="room-name" class="form-label">Room Name</label>
-                        <input type="text" class="form-control" id="room-name" placeholder="Enter room name" required />
-                    </div>
-                    <div class="mb-3">
                         <label for="capacity" class="form-label">Capacity</label>
                         <input type="number" class="form-control" id="capacity" placeholder="Enter room capacity" required />
                     </div>
@@ -156,12 +143,38 @@
                         <label for="equipment" class="form-label">Equipment</label>
                         <input type="text" class="form-control" id="equipment" placeholder="Enter equipment (e.g., Smartboard, Projector)" required />
                     </div>
-                    <div class="mb-3">
-                        <label for="available-time" class="form-label">Available Time</label>
-                        <input type="text" class="form-control" id="available-time" placeholder="Enter available time" required />
+                    <!-- Time Slot Selection -->
+                     <div class="mb-3">
+                        <label for="time-slot" class="form-label">Select Time Slot</label>
+                        <select id="time-slot" name="time_slot" class="form-select" required>
+                            <option value="" disabled selected>Select a time slot</option>
+                            <option value="08:00-10:00">08:00 AM - 10:00 AM</option>
+                            <option value="10:00-12:00">10:00 AM - 12:00 PM</option>
+                        </select>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Add Room</button>
+                    </div>
+                </form>
+            </div>
+
+        </section>
+
+        <!-- Time Slots -->
+        <section id="add-room">
+            <div class="container add-room-form">
+                <h2 class="text-center">Add New Time Slot</h2>
+                <form>
+                    <div class="mb-3">
+                        <label for="capacity" class="form-label">Start Time</label>
+                        <input type="time" class="form-control" id="capacity" placeholder="Enter Start Time" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="equipment" class="form-label">End Time</label>
+                        <input type="time" class="form-control" id="equipment" placeholder="End Time" required />
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Add Time Slot</button>
                     </div>
                 </form>
             </div>
