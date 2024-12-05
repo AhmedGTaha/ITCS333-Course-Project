@@ -154,11 +154,17 @@ include ("../db.php");
               <div class="card room-card">
                 <div class="card-body">
                   <h5 class="card-title">Room <?php echo $book['RoomID'] ?></h5>
-                  <p class="card-text">Booked by:<?php echo $book['Name'] ?></p>
-                  <p class="card-text"><?php echo $book['BookDate'] ?></p>
+                  <p class="card-text">Request ID: <?php echo $book['requestID'] ?></p>
+                  <p class="card-text">Booked by: <?php echo $book['Name'] ?></p>
+                  <p class="card-text">Date: <?php echo $book['BookDate'] ?></p>
                   <p class="card-text">Time: <?php echo $book['start']. " - " . $book['end']?></p>
                   <p class="card-text">Capacity: <?php echo $book['capacity'] ?> | Equipment: <?php echo $book['equipment'] ?></p>
-                  <button class="btn btn-danger">Cancel Booking</button>
+
+                 <form action="userBookings.php" method="POST"> 
+                  <input type="hidden" name="rid" value="<?php echo $book['requestID'] ?>">
+                  <button class="btn btn-danger" type="submit">Cancel Booking</button>
+                 </form>
+
                 </div>
               </div>
             </div>
@@ -166,7 +172,7 @@ include ("../db.php");
            }
           ?>
             
-          </div>
+         </div>
         </div>
       </section>
     </div>
@@ -176,5 +182,34 @@ include ("../db.php");
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+
+    <?php
+
+
+if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['rid']))
+{
+
+  try
+  {
+  
+    $requestID = $_POST['rid'];
+    $sql = "Delete from book where book.requestID ='$requestID'";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    echo "<script>alert('User deleted succesfuly')</script>";
+    
+  } catch(PDOException $e) 
+  {
+    echo "<script>alert('Error in Deletion')</script>";
+
+  }
+
+
+}
+?>
   </body>
 </html>
+
+
+
+

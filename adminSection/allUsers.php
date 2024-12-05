@@ -152,7 +152,7 @@ include('../db.php');
           try
           {
 
-            $sql = "Select * from users";
+            $sql = "Select * from users where role='student'";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $results = $stmt->fetchAll();
@@ -173,12 +173,18 @@ include('../db.php');
             
             foreach($results as $result)
             {
+              $pic = "../" . $result['profile_picture'];
+              if($result['profile_picture'] == NULL)
+              {
+                $pic = $result['profile_picture'];
+              }
+
             ?>            
             <div class="col">
               <div class="card user-card">
                 <div class="card-body text-center">
                   <img
-                    src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
+                    src="<?php echo $pic ?? 'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'; ?>"
                     class="rounded-circle mb-3"
                     alt="User Avatar"
                   />

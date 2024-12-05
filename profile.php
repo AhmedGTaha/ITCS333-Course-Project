@@ -147,7 +147,7 @@ include('db.php');
 
       <script></script>
 
-    <?php
+<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateProfile'])) 
 {
   
