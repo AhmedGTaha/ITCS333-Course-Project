@@ -147,13 +147,31 @@ include('../db.php');
             </div>
         </div>
 
+
+        <?php
+
+          try
+          {
+            $sql = "SELECT count(*) as total from book";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $totalBooking = $stmt->fetchColumn();
+
+          } catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+          }
+
+
+        ?>
+
+
         <!-- Stats Section -->
         <div class="row mb-5">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Total Bookings</h5>
-                        <p class="card-text fs-4">150</p>
+                        <p class="card-text fs-4"><?php echo $totalBooking ?></p>
                     </div>
                 </div>
             </div>
