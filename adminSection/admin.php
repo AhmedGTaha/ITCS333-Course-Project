@@ -16,7 +16,8 @@ include('../db.php');
         crossorigin="anonymous" />
     <title>Admin Dashboard - IT College Room Booking System</title>
     <style>
-        body {
+        body 
+        {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f9f9f9;
         }
@@ -133,8 +134,8 @@ include('../db.php');
                 <img
                     src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
                     alt="User Avatar" />
-                <h5>Good Morning, Ahmed Taha</h5>
-                <p>ID: 202203742</p>
+                <h5>Good Morning, <?php echo $_SESSION['name'] ?></h5>
+                <p>ID: <?php echo $_SESSION['email'] ?></p>
                 <hr />
                 <div class="d-flex gap-2 justify-content-center mt-3">
                     <a href="adminProfile.php" class="btn btn-outline-primary btn-sm">Edit Profile</a>
