@@ -1,4 +1,8 @@
-<?php ?>
+<?php
+session_start();
+include('../db.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -142,8 +146,34 @@
             <p>Admin can view the list of all users and their room booking status.</p>
           </div>
 
+
+          <?php 
+          
+          try
+          {
+
+            $sql = "Select * from users";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+          } catch(PDOException $e) 
+          {
+            echo "Connection failed: " . $e->getMessage();
+          }
+
+
+
+          ?>
           <div class="row row-cols-1 row-cols-md-3 g-4">
             <!-- User 1 -->
+
+
+            <?php  
+            
+            foreach($results as $result)
+            {
+            ?>            
             <div class="col">
               <div class="card user-card">
                 <div class="card-body text-center">
@@ -152,91 +182,18 @@
                     class="rounded-circle mb-3"
                     alt="User Avatar"
                   />
-                  <h5 class="card-title">Ahmed Taha</h5>
-                  <p class="card-text">ID: 1</p>
-                  <p class="card-text">Room Booked: Room 101</p>
-                  <p class="card-text">Email: ahmed@example.com</p>
-                  <p class="card-text">Phone: +123 456 7890</p>
+                  <h5 class="card-title"><?php echo $result['Name'] ?></h5>
+                  <p class="card-text">Email: <?php echo $result['Email'] ?></p>
+                  <p class="card-text">Phone: <?php echo $result['Phone'] ?></p>
                   <button class="btn btn-danger">Delete User</button>
                 </div>
               </div>
             </div>
 
-            <!-- User 2 -->
-            <div class="col">
-              <div class="card user-card">
-                <div class="card-body text-center">
-                  <img
-                    src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
-                    class="rounded-circle mb-3"
-                    alt="User Avatar"
-                  />
-                  <h5 class="card-title">Ali Hassan</h5>
-                  <p class="card-text">ID: 2</p>
-                  <p class="card-text">Room Booked: None</p>
-                  <p class="card-text">Email: ali@example.com</p>
-                  <p class="card-text">Phone: +123 456 7891</p>
-                  <button class="btn btn-danger">Delete User</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- User 3 -->
-            <div class="col">
-              <div class="card user-card">
-                <div class="card-body text-center">
-                  <img
-                    src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
-                    class="rounded-circle mb-3"
-                    alt="User Avatar"
-                  />
-                  <h5 class="card-title">Sara Ali</h5>
-                  <p class="card-text">ID: 3</p>
-                  <p class="card-text">Room Booked: Room 103</p>
-                  <p class="card-text">Email: sara@example.com</p>
-                  <p class="card-text">Phone: +123 456 7892</p>
-                  <button class="btn btn-danger">Delete User</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- User 4 -->
-            <div class="col">
-              <div class="card user-card">
-                <div class="card-body text-center">
-                  <img
-                    src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
-                    class="rounded-circle mb-3"
-                    alt="User Avatar"
-                  />
-                  <h5 class="card-title">Omar Khaled</h5>
-                  <p class="card-text">ID: 4</p>
-                  <p class="card-text">Room Booked: None</p>
-                  <p class="card-text">Email: omar@example.com</p>
-                  <p class="card-text">Phone: +123 456 7893</p>
-                  <button class="btn btn-danger">Delete User</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- User 5 -->
-            <div class="col">
-              <div class="card user-card">
-                <div class="card-body text-center">
-                  <img
-                    src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg"
-                    class="rounded-circle mb-3"
-                    alt="User Avatar"
-                  />
-                  <h5 class="card-title">Hala Nour</h5>
-                  <p class="card-text">ID: 5</p>
-                  <p class="card-text">Room Booked: Room 102</p>
-                  <p class="card-text">Email: hala@example.com</p>
-                  <p class="card-text">Phone: +123 456 7894</p>
-                  <button class="btn btn-danger">Delete User</button>
-                </div>
-              </div>
-            </div>
+            <?php
+            }
+            ?>
+           
           </div>
         </div>
       </section>
