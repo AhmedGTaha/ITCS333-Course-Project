@@ -1,4 +1,7 @@
-<?php ?>
+<?php 
+session_start();
+include ("../db.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -129,80 +132,40 @@
             <p>Admin can view the list of rooms booked by all users</p>
           </div>
           <div class="row row-cols-1 row-cols-md-3 g-4">
+
+          <?php
+            try
+            {
+  
+              $sql = "SELECT * FROM book JOIN users ON book.Email = users.Email JOIN availabletimeslots ON availabletimeslots.ATID = book.ATID join room on room.RoomID = availabletimeslots.RoomID;";
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              $results = $stmt->fetchAll();
+  
+            } catch(PDOException $e) 
+            {
+              echo "Connection failed: " . $e->getMessage();
+            }
+
+          foreach($results as $book){
+          ?>
             <!-- Room 1 -->
             <div class="col">
               <div class="card room-card">
                 <div class="card-body">
-                  <h5 class="card-title">Room 101</h5>
-                  <p class="card-text">Booked by: Ahmed Taha</p>
-                  <p class="card-text">Date: 2024-11-29</p>
-                  <p class="card-text">Time: 10:00 - 12:00</p>
-                  <p class="card-text">Capacity: 25 | Equipment: Smartboard</p>
-                  <p class="card-text">Status: Booked</p>
+                  <h5 class="card-title">Room <?php echo $book['RoomID'] ?></h5>
+                  <p class="card-text">Booked by:<?php echo $book['Name'] ?></p>
+                  <p class="card-text"><?php echo $book['BookDate'] ?></p>
+                  <p class="card-text">Time: <?php echo $book['start']. " - " . $book['end']?></p>
+                  <p class="card-text">Capacity: <?php echo $book['capacity'] ?> | Equipment: <?php echo $book['equipment'] ?></p>
                   <button class="btn btn-danger">Cancel Booking</button>
                 </div>
               </div>
             </div>
-
-            <!-- Room 2 -->
-            <div class="col">
-              <div class="card room-card">
-                <div class="card-body">
-                  <h5 class="card-title">Room 102</h5>
-                  <p class="card-text">Booked by: Ali Hassan</p>
-                  <p class="card-text">Date: 2024-12-01</p>
-                  <p class="card-text">Time: 11:00 - 1:00</p>
-                  <p class="card-text">Capacity: 30 | Equipment: Projector, Whiteboard</p>
-                  <p class="card-text">Status: Booked</p>
-                  <button class="btn btn-danger">Cancel Booking</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Room 3 -->
-            <div class="col">
-              <div class="card room-card">
-                <div class="card-body">
-                  <h5 class="card-title">Room 103</h5>
-                  <p class="card-text">Booked by: Sara Ali</p>
-                  <p class="card-text">Date: 2024-12-05</p>
-                  <p class="card-text">Time: 2:00 - 3:00</p>
-                  <p class="card-text">Capacity: 20 | Equipment: Smartboard</p>
-                  <p class="card-text">Status: Booked</p>
-                  <button class="btn btn-danger">Cancel Booking</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Room 4 -->
-            <div class="col">
-              <div class="card room-card">
-                <div class="card-body">
-                  <h5 class="card-title">Room 104</h5>
-                  <p class="card-text">Booked by: Ahmed Taha</p>
-                  <p class="card-text">Date: 2024-12-10</p>
-                  <p class="card-text">Time: 9:00 - 11:00</p>
-                  <p class="card-text">Capacity: 25 | Equipment: Whiteboard</p>
-                  <p class="card-text">Status: Booked</p>
-                  <button class="btn btn-danger">Cancel Booking</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Room 5 -->
-            <div class="col">
-              <div class="card room-card">
-                <div class="card-body">
-                  <h5 class="card-title">Room 105</h5>
-                  <p class="card-text">Booked by: Sara Ali</p>
-                  <p class="card-text">Date: 2024-12-12</p>
-                  <p class="card-text">Time: 3:00 - 5:00</p>
-                  <p class="card-text">Capacity: 20 | Equipment: Projector</p>
-                  <p class="card-text">Status: Booked</p>
-                  <button class="btn btn-danger">Cancel Booking</button>
-                </div>
-              </div>
-            </div>
+          <?php 
+           }
+          ?>
+            
           </div>
         </div>
       </section>
