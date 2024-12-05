@@ -22,8 +22,4 @@ try
     header("Location: Home.php");
 }
 }
-
-
-
-
 ?>

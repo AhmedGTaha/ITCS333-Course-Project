@@ -7,10 +7,6 @@ include("db.php");
 $roomID = $_GET['RoomID'];
 
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,8 +19,47 @@ $roomID = $_GET['RoomID'];
         crossorigin="anonymous"
     />
     <title>View Details</title>
+    <style>
+        
+
+      footer {
+        background-color: #333;
+        color: #f9f9f9;
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      .navbar-brand img {
+        max-height: 30px;
+      }
+
+      .navbar-light .navbar-nav .nav-link.active {
+        font-weight: bold;
+        color: #6c757d;
+      }
+
+      .btn-primary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+      }
+
+      .btn-primary:hover {
+        background-color: #5a6268;
+      }
+
+      .section-title {
+        text-align: center;
+        color: #6c757d;
+        margin-bottom: 30px;
+      }
+    </style>
 </head>
 <body class="bg-light">
+    <?php include("nav.php"); ?>
     <div class="container py-5">
         <!-- Page Header -->
         <div class="text-center mb-4">
@@ -89,8 +124,8 @@ $roomID = $_GET['RoomID'];
         </div>
     </div>
 
+    <?php include ("footer.php"); ?>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wBEBZcKfUC6L5OsFb6q3FqEnBh+8NUvSt6n6hq3xeW06JDut1qG2A1GzIW4Iro7g" crossorigin="anonymous"></script>
 </body>
 </html>
-
-

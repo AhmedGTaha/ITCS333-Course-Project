@@ -26,7 +26,7 @@ if (isset($_SESSION['Email'])) {
                     echo "your register is completed successfully";
                 echo "</div>";
             }
-
+             //New:  Add error massege 
             if(isset($_SESSION['login_error']))
             {
                 echo "<div class='alert alert-danger' role='alert'>" ;
@@ -49,7 +49,7 @@ if (isset($_SESSION['Email'])) {
                 <button type="submit" class="btn btn-secondary w-100">Login</button>
             </form>
             <div class="text-center mt-3">
-                <a href="register.php" class="text-decoration-none">Don't have an account? Register</a>
+                <small>Don't have an account? <a href="register.php" class="text-decoration-none">Register</a></small>
             </div>
         </div>
     </div>
