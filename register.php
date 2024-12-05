@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
     $name = trim($_POST['name']);
     $phone = trim($_POST['phone']);
-    $role = 'student'; // Default role
+    $role = trim($_POST['role']); // Capture role from form
 
     // Validate UOB email format
     if (preg_match("/^[0-9]{9}@stu\\.uob\\.edu\\.bh$/", $email)) {
