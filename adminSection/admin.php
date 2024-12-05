@@ -152,10 +152,20 @@ include('../db.php');
 
           try
           {
-            $sql = "SELECT count(*) as total from book";
+            $sql = "SELECT count(*) from book";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $totalBooking = $stmt->fetchColumn();
+
+            $sql = "SELECT count(*) from users";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $totalUsers = $stmt->fetchColumn();
+
+            $sql = "SELECT count(*) from Room";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $totalRooms = $stmt->fetchColumn();
 
           } catch(PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
@@ -179,15 +189,15 @@ include('../db.php');
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Total Users</h5>
-                        <p class="card-text fs-4">250</p>
+                        <p class="card-text fs-4"><?php echo $totalUsers ?></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Available Rooms</h5>
-                        <p class="card-text fs-4">5</p>
+                        <h5 class="card-title">Total Rooms</h5>
+                        <p class="card-text fs-4"><?php echo $totalRooms ?></p>
                     </div>
                 </div>
             </div>
