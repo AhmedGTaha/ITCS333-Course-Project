@@ -40,6 +40,19 @@ include('db.php'); // Database connection
                     <label for="phone" class="form-label">Phone</label>
                     <input type="tel" class="form-control" id="phone" name="phone" placeholder="e.g. 0123456789" required>
                 </div>
+                <div class="mb-3">
+                     <label class="form-label">Role</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="role" id="student" value="student" checked>
+                            <label class="form-check-label" for="student">Student</label>
+                         </div>
+                    <div class="form-check">
+                            <input class="form-check-input" type="radio" name="role" id="admin" value="admin">
+                            <label class="form-check-label" for="admin">Admin</label>
+                    </div>
+                </div>
+                
+
                 <button type="submit" class="btn btn-secondary w-100">Register</button>
             </form>
             <div class="text-center mt-3">
@@ -58,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
     $name = trim($_POST['name']);
     $phone = trim($_POST['phone']);
-    $role = 'student'; // Default role
+    $role = trim($_POST['role']); // Capture role from form
 
     // Validate UOB email format
     if (preg_match("/^[0-9]{9}@stu\\.uob\\.edu\\.bh$/", $email)) {

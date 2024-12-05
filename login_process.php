@@ -38,7 +38,7 @@ include ("db.php");
                     header("Location: Home.php");
                 }else
                 {
-                  header("Location: admin.php");
+                  header("Location: adminSection/admin.php");
                 }
 
             } else 
