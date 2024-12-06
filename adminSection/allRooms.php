@@ -384,25 +384,6 @@ include ('../db.php');
 
 
 
-           if(isset($_POST['DeleteTime']) && $_SERVER['REQUEST_METHOD'] == 'POST')
-           {
-            try
-            {
-             
-              $ATID = $_POST['ATID'];
-              $sql = "Delete from availabletimeslots where ATID  = '$ATID'";
-              $stmt = $conn->prepare($sql);
-              $stmt->execute();
-              echo "<script>alert('deleted succesfuly')</script>";
-
-            } catch(PDOException $e) 
-            {
-              echo "<script>alert('error in deletion')</script>";
-              echo  $e->getMessage(); 
-            }
-
-           }
-
     
         ?>
 </body>

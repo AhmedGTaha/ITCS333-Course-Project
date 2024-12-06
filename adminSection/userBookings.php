@@ -160,7 +160,7 @@ include ("../db.php");
                   <p class="card-text">Time: <?php echo $book['start']. " - " . $book['end']?></p>
                   <p class="card-text">Capacity: <?php echo $book['capacity'] ?> | Equipment: <?php echo $book['equipment'] ?></p>
 
-                 <form action="userBookings.php" method="POST"> 
+                 <form action="deleteBook.php" method="POST"> 
                   <input type="hidden" name="rid" value="<?php echo $book['requestID'] ?>">
                   <button class="btn btn-danger" type="submit">Cancel Booking</button>
                  </form>
@@ -185,6 +185,18 @@ include ("../db.php");
 
     <?php
 
+    if(isset($_SESSION['deleteBook']))
+    {
+        if($_SESSION['deleteBook'] == true)
+        {
+          echo "<script>alert('Book deleted succesfuly')</script>";
+        }else
+        {
+          echo "<script>alert('Book deleted succesfuly')</script>";
+        }
+
+    }
+
 
 if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['rid']))
 {
@@ -196,14 +208,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['rid']))
     $sql = "Delete from book where book.requestID ='$requestID'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
-    echo "<script>alert('User deleted succesfuly')</script>";
+    echo "<script>alert('Book deleted succesfuly')</script>";
     
   } catch(PDOException $e) 
   {
     echo "<script>alert('Error in Deletion')</script>";
 
   }
-
 
 }
 ?>

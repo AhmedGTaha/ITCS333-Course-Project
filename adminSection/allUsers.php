@@ -191,7 +191,10 @@ include('../db.php');
                   <h5 class="card-title"><?php echo $result['Name'] ?></h5>
                   <p class="card-text">Email: <?php echo $result['Email'] ?></p>
                   <p class="card-text">Phone: <?php echo $result['Phone'] ?></p>
-                  <button class="btn btn-danger">Delete User</button>
+                  <form action="deleteUser.php" method="post">
+                    <input type="hidden" name="Email" value="<?php echo $result['Email'] ?>">
+                    <button name="deletUser" class="btn btn-danger">Delete User</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -210,5 +213,26 @@ include('../db.php');
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+
+    <?php
+
+     if(isset($_SESSION['deleteUser']))
+     {
+      if($_SESSION['deleteUser'] == true)
+      {
+        echo "<script>alert('Deleted user succesfully')</script>";
+        
+      }else
+      {
+        echo "<script>alert('Error in add Room')</script>";
+      }
+         
+      unset($_SESSION['deleteUser']);
+     }
+  
+
+
+    ?>
   </body>
 </html>
+

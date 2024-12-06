@@ -31,7 +31,7 @@ include ("db.php");
                 // Set session variables
                 $_SESSION['email'] = $user['Email'];
                 $_SESSION['name'] = $user['Name'];
-                
+                $_SESSION['profile_picture'] = $user['profile_picture'];
                 // Redirect to student or admin dashboard based on role
                 if($user['role'] == 'student')
                 {

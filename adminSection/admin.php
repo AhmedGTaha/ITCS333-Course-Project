@@ -142,7 +142,7 @@ include('../db.php');
                     <a href="userBookings.php" class="btn btn-outline-secondary btn-sm">Bookings</a>
                     <a href="allRooms.php" class="btn btn-outline-secondary btn-sm">Rooms</a>
                     <a href="allUsers.php" class="btn btn-outline-secondary btn-sm">Users</a>
-                    <a href="#" class="btn btn-outline-danger btn-sm">Logout</a>
+                    <a href="../logout.php" class="btn btn-outline-danger btn-sm">Logout</a>
                 </div>
             </div>
         </div>
