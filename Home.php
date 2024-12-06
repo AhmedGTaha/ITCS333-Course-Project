@@ -135,6 +135,7 @@ include("db.php");
               <div class="card-body">
                 <h5 class="card-title">Room <?php echo $book['RoomID'] ?></h5>
                 <p>Capacity:<?php echo $book['capacity'] ?> | Equipment: <?php echo $book['equipment'] ?></p>
+                <p>Date: <?php echo $book['BookDate'] ?></p>
                 <p>Available Time: <?php echo $book['start'] ?> - <?php echo $book['end'] ?></p>
                 <form action="cancelBooking.php" method="post">
                     <input type="hidden" name="rid" value="<?php echo $book['requestID']?>"> <!-- Replace with dynamic booking ID -->
