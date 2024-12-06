@@ -219,7 +219,7 @@ include('../db.php');
      {
       if($_SESSION['deleteUser'] == true)
       {
-        echo "<script>alert('User deleted succesfully')</script>";
+        echo "<script>alert('User deleted successfully')</script>";
         
       }else
       {
