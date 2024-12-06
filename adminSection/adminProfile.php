@@ -355,7 +355,7 @@ if(isset($_POST['upload_picture']) && $_SERVER["REQUEST_METHOD"] == "POST")
               $stmt->execute();
               // Update session variable
               $_SESSION['profile_picture'] = $target_file;
-              header("Location: profile.php");
+            
           } catch (PDOException $e) 
           {
               echo "<script>alert('Database update failed: " . $e->getMessage() . "');</script>";
