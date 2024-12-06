@@ -1,4 +1,9 @@
-<?php ?>
+<?php 
+
+session_start();
+include ('../db.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -134,26 +139,17 @@
         <section id="add-room">
             <div class="container add-room-form">
                 <h2 class="text-center">Add New Room</h2>
-                <form>
+                <form action="allRooms.php" method="POST">
                     <div class="mb-3">
                         <label for="capacity" class="form-label">Capacity</label>
-                        <input type="number" class="form-control" id="capacity" placeholder="Enter room capacity" required />
+                        <input name="capacity" type="number" class="form-control" id="capacity" placeholder="Enter room capacity" required />
                     </div>
                     <div class="mb-3">
                         <label for="equipment" class="form-label">Equipment</label>
-                        <input type="text" class="form-control" id="equipment" placeholder="Enter equipment (e.g., Smartboard, Projector)" required />
-                    </div>
-                    <!-- Time Slot Selection -->
-                     <div class="mb-3">
-                        <label for="time-slot" class="form-label">Select Time Slot</label>
-                        <select id="time-slot" name="time_slot" class="form-select" required>
-                            <option value="" disabled selected>Select a time slot</option>
-                            <option value="08:00-10:00">08:00 AM - 10:00 AM</option>
-                            <option value="10:00-12:00">10:00 AM - 12:00 PM</option>
-                        </select>
+                        <input name="equipment" type="text" class="form-control" id="equipment" placeholder="Enter equipment (e.g., Smartboard, Projector)" required />
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Add Room</button>
+                        <button name="AddRoom" type="submit" class="btn btn-primary">Add Room</button>
                     </div>
                 </form>
             </div>
@@ -164,17 +160,44 @@
         <section id="add-room">
             <div class="container add-room-form">
                 <h2 class="text-center">Add New Time Slot</h2>
-                <form>
+                <form action="allRooms.php" method="post">
+                    <!-- Rooms -->
                     <div class="mb-3">
-                        <label for="capacity" class="form-label">Start Time</label>
-                        <input type="time" class="form-control" id="capacity" placeholder="Enter Start Time" required />
+                        <label for="RoomID" class="form-label">select room</label>
+                        <select id="RoomID" name="RoomID" class="form-select" required>
+                            <option value="" disabled selected>select room</option>
+                            <?php
+                            try
+                            {
+                              $sql = "Select * from room";
+                              $stmt = $conn->prepare($sql);
+                              $stmt->execute();
+                              $results = $stmt->fetchAll();
+                  
+                            } catch(PDOException $e) 
+                            {
+                              echo "Connection failed: " . $e->getMessage();
+                            }
+                  
+                         foreach($results as $room)
+                         {
+                        ?>
+                            <option value="<?php echo $room['RoomID'] ?>"><?php echo $room['RoomID'] ?></option>
+                        <?php
+                         }
+                         ?>
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label for="equipment" class="form-label">End Time</label>
-                        <input type="time" class="form-control" id="equipment" placeholder="End Time" required />
+                        <label for="start" class="form-label">Start Time</label>
+                        <input name="start" type="time" class="form-control" id="start" placeholder="Enter Start Time" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="end" class="form-label">End Time</label>
+                        <input name="end" type="time" class="form-control" id="end" placeholder="End Time" required />
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Add Time Slot</button>
+                        <button name="AddTime" type="submit" class="btn btn-primary">Add Time Slot</button>
                     </div>
                 </form>
             </div>
@@ -189,80 +212,47 @@
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <?php
+                            try
+                            {
+                              $sql = "Select * from availabletimeslots as av join room on av.RoomID = room.RoomID";
+                              $stmt = $conn->prepare($sql);
+                              $stmt->execute();
+                              $results = $stmt->fetchAll();
+                  
+                            } catch(PDOException $e) 
+                            {
+                              echo "Connection failed: " . $e->getMessage();
+                            }
+                  
+                         foreach($results as $room)
+                         {
+                    ?>
                     <!-- Room 1 -->
                     <div class="col">
                         <div class="card room-card">
                             <div class="card-body">
-                                <h5 class="card-title">Room 101</h5>
-                                <p class="card-text">Capacity: 25 | Equipment: Smartboard</p>
-                                <p class="card-text">Available Time: 10:00 - 10:50 | Status: Available</p>
+                                <h5 class="card-title">Room <?php echo $room['RoomID'] ?></h5>
+                                <p class="card-text">Capacity: <?php echo $room['capacity'] ?> | Equipment: <?php echo $room['equipment'] ?></p>
+                                <p class="card-text">Available Time: <?php echo $room['start'] . "-" . $room['end'] ?></p>
                                 <div class="room-actions">
-                                    <a href="edit.php"><button class="btn btn-primary">Edit</button></a>
-                                    <button class="btn btn-danger">Delete</button>
+                                    <form action="edit.php" method="POST">
+                                       <input type="hidden" name="RoomID" id="RoomID" value="<?php echo $room['RoomID'] ?>">
+                                       <button name="edit" class="btn btn-primary">Edit</button>
+                                    </form>
+                                    <form action="allRooms.php" method="post">
+                                        <input type="hidden" name="ATID" id="ATID" value="<?php echo $room['ATID'] ?>">
+                                        <button name="Delete" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Room 2 -->
-                    <div class="col">
-                        <div class="card room-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Room 102</h5>
-                                <p class="card-text">Capacity: 30 | Equipment: Projector, Whiteboard</p>
-                                <p class="card-text">Available Time: 11:00 - 12:00 | Status: Available</p>
-                                <div class="room-actions">
-                                    <a href="edit.php"><button class="btn btn-primary">Edit</button></a>
-                                    <button class="btn btn-danger">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Room 3 -->
-                    <div class="col">
-                        <div class="card room-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Room 103</h5>
-                                <p class="card-text">Capacity: 20 | Equipment: Smartboard</p>
-                                <p class="card-text">Available Time: 2:00 - 3:00 | Status: Booked</p>
-                                <div class="room-actions">
-                                    <a href="edit.php"><button class="btn btn-primary">Edit</button></a>
-                                    <button class="btn btn-danger">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Room 4 -->
-                    <div class="col">
-                        <div class="card room-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Room 104</h5>
-                                <p class="card-text">Capacity: 40 | Equipment: Projector, Whiteboard</p>
-                                <p class="card-text">Available Time: 1:00 - 3:00 | Status: Available</p>
-                                <div class="room-actions">
-                                    <a href="edit.php"><button class="btn btn-primary">Edit</button></a>
-                                    <button class="btn btn-danger">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Room 5 -->
-                    <div class="col">
-                        <div class="card room-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Room 105</h5>
-                                <p class="card-text">Capacity: 15 | Equipment: Whiteboard</p>
-                                <p class="card-text">Available Time: 9:00 - 10:00 | Status: Available</p>
-                                <div class="room-actions">
-                                    <a href="edit.php"><button class="btn btn-primary">Edit</button></a>
-                                    <button class="btn btn-danger">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                         }
+                    ?>
+                
                 </div>
             </div>
         </section>
@@ -272,6 +262,77 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+
+
+        <?php
+
+            // FUNCTIONALITY FOR ADD ROOM
+           if(isset($_POST['AddRoom']) && $_SERVER['REQUEST_METHOD'] == 'POST')
+           {
+            try
+            {
+             
+                $cap = $_POST['capacity'];
+                $equ = $_POST['equipment'];
+
+              $sql = "insert into room (capacity,equipment) values('$cap','$equ')";
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              echo "<script>alert('Room added succesfuly')</script>";
+              
+            } catch(PDOException $e) 
+            {
+              echo "<script>alert('Error in add Room')</script>";
+          
+            }
+
+           }
+ 
+
+           // FUNCTIONALITY FOR ADD TIME SLOT
+           if(isset($_POST['AddTime']) && $_SERVER['REQUEST_METHOD'] == 'POST')
+           {
+            try
+            {
+             
+              $roomID = $_POST['RoomID'];
+              $start = $_POST['start'];
+              $end = $_POST['end'];
+              $sql = "insert into availabletimeslots (RoomID,start,end) values('$roomID','$start','$end')";
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              echo "<script>alert('Time added succesfuly')</script>";
+              
+            } catch(PDOException $e) 
+            {
+              echo "<script>alert('Error in add Time')</script>";
+            }
+
+           }
+
+
+           //FUNCTIONALITY FOR DELETE ROOM
+           if(isset($_POST['Delete']) && $_SERVER['REQUEST_METHOD'] == 'POST')
+           {
+            try
+            {
+             
+              $ATID = $_POST['ATID'];
+              $sql = "Delete from availabletimeslots where ATID ='$ATID'";
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              echo "<script>alert('deleted succesfuly')</script>";
+              
+            } catch(PDOException $e) 
+            {
+              echo "<script>alert('error in deletion')</script>";
+              echo  $e->getMessage(); 
+            }
+
+           }
+
+        ?>
 </body>
 
 </html>

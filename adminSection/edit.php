@@ -1,4 +1,13 @@
-<?php ?>
+<?php
+
+include("../db.php");
+session_start();
+
+ 
+$roomID = $_POST['RoomID'];
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -109,36 +118,29 @@
                     <p>Modify the room's information below</p>
                 </div>
 
-                <form>
+                <form action="edit.php" method="post">
                     <div class="mb-3">
                         <label for="capacity" class="form-label">Capacity</label>
-                        <input type="number" class="form-control" id="capacity" value="25" required />
+                        <input name="capacity" type="number" class="form-control" id="capacity"  />
                     </div>
 
                     <div class="mb-3">
                         <label for="equipment" class="form-label">Equipment</label>
-                        <input type="text" class="form-control" id="equipment" value="Smartboard" required />
+                        <input name="equipment" type="text" class="form-control" id="equipment"  />
                     </div>
-                    <!-- Time Slot Selection -->
-                    <div class="mb-3">
-                        <label for="time-slot" class="form-label">Select Time Slot</label>
-                        <select id="time-slot" name="time_slot" class="form-select" required>
-                            <option value="" disabled selected>Select a time slot</option>
-                            <option value="08:00-10:00">08:00 AM - 10:00 AM</option>
-                            <option value="10:00-12:00">10:00 AM - 12:00 PM</option>
-                        </select>
-                    </div>
+                    
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button name="save" type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                 </form>
             </div>
         </section>
     </div>
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+  
+
+
+
+    
 </body>
 
 </html>
