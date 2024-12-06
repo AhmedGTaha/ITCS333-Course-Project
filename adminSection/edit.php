@@ -3,8 +3,6 @@
 include("../db.php");
 session_start();
 
- 
-$roomID = $_POST['RoomID'];
 
 
 ?>
@@ -138,6 +136,12 @@ $roomID = $_POST['RoomID'];
     </div>
   
 
+
+    <?php
+     
+
+
+    ?>
 
 
     

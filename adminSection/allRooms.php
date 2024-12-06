@@ -236,7 +236,7 @@ include ('../db.php');
                                 <p class="card-text">Capacity: <?php echo $room['capacity'] ?> | Equipment: <?php echo $room['equipment'] ?></p>
                                 <p class="card-text">Available Time: <?php echo $room['start'] . "-" . $room['end'] ?></p>
                                 <div class="room-actions">
-                                    <form action="edit.php" method="POST">
+                                    <form action="allRooms.php" method="POST">
                                        <input type="hidden" name="RoomID" id="RoomID" value="<?php echo $room['RoomID'] ?>">
                                        <button name="edit" class="btn btn-primary">Edit</button>
                                     </form>
@@ -332,6 +332,8 @@ include ('../db.php');
 
            }
 
+
+    
         ?>
 </body>
 
