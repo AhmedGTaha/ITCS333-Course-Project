@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = trim($_POST['role']); // Capture role from form
 
     // Validate UOB email format
-    if (preg_match("/^[0-9]{9}@stu\\.uob\\.edu\\.bh$/", $email)) {
+    if (preg_match("/^[0-9]{9}@stu\\.uob\\.edu\\.bh$/", $email) || preg_match("/^[a-zA-Z]+@uob\.edu\.bh$/", $email)) {
         try {
             // Insert user data into the database
             $sql = "INSERT INTO Users (Email, pass, Name, Phone, role) VALUES (?, ?, ?, ?, ?)";
