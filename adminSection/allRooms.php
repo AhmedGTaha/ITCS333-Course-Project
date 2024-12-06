@@ -153,7 +153,6 @@ include ('../db.php');
                     </div>
                 </form>
             </div>
-
         </section>
 
         <!-- Time Slots -->
@@ -228,7 +227,6 @@ include ('../db.php');
                          foreach($results as $room){
                               
                     ?>
-                    <!-- Room 1 -->
                     <div class="col">
                         <div class="card room-card">
                             <div class="card-body">
@@ -252,12 +250,6 @@ include ('../db.php');
                 
                 </div>
             </div>
-        </section>
-    </div>
-
-
-    <!-- time slots section-->
-    <section id="rooms">
             <div class="container">
                 <div class="admin-panel-header">
                     <h2>View time slots</h2>
