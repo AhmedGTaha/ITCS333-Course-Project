@@ -3,8 +3,6 @@
 include("../db.php");
 session_start();
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,7 +114,33 @@ session_start();
                     <p>Modify the room's information below</p>
                 </div>
 
-                <form action="edit.php" method="post">
+                <form action="edit.php" method="POST">
+                <div class="mb-3">
+                        <label for="RoomID" class="form-label">select room</label>
+                        <select id="RoomID" name="RoomID" class="form-select" required>
+                            <option value="" disabled selected>select room</option>
+                            <?php
+                            try
+                            {
+                              $sql = "Select * from room";
+                              $stmt = $conn->prepare($sql);
+                              $stmt->execute();
+                              $results = $stmt->fetchAll();
+                  
+                            } catch(PDOException $e) 
+                            {
+                              echo "Connection failed: " . $e->getMessage();
+                            }
+                  
+                         foreach($results as $room)
+                         {
+                        ?>
+                            <option value="<?php echo $room['RoomID'] ?>"><?php echo $room['RoomID'] ?></option>
+                        <?php
+                         }
+                         ?>
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <label for="capacity" class="form-label">Capacity</label>
                         <input name="capacity" type="number" class="form-control" id="capacity"  />
@@ -128,7 +152,7 @@ session_start();
                     </div>
                     
                     <div class="text-center">
-                        <button name="save" type="submit" class="btn btn-primary">Save Changes</button>
+                        <button name="save_changes" type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                 </form>
             </div>
@@ -139,6 +163,48 @@ session_start();
 
     <?php
      
+
+     if(isset($_POST['save_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST')
+     {
+        $roomID = $_POST['RoomID'];
+
+        if(!empty($_POST['capacity']))
+        {
+            $capacity = $_POST['capacity'];
+            try
+            {
+                $sql = "UPDATE room set capacity = '$capacity' where RoomID = '$roomID'";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                echo "<script>alert('capacity changed sucssefully')</script>";
+    
+            }catch(PDOException $e)
+            {
+                echo "<script>alert('Error capacity changing')</script>";
+            }
+        }
+
+        if(!empty($_POST['equipment']))
+        {
+            $equipment = $_POST['equipment'];
+            try
+            {
+                $sql = "UPDATE room set equipment = '$equipment' where RoomID = '$roomID'";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                echo "<script>alert('equipment changed sucssefully')</script>";
+    
+            }catch(PDOException $e)
+            {
+                echo "<script>alert('Error equipment changing')</script>";
+            }
+        }
+     
+
+
+
+       
+     }
 
 
     ?>
