@@ -139,7 +139,7 @@ include ('../db.php');
         <section id="add-room">
             <div class="container add-room-form">
                 <h2 class="text-center">Add New Room</h2>
-                <form action="allRooms.php" method="POST">
+                <form action="addRoom.php" method="POST">
                     <div class="mb-3">
                         <label for="capacity" class="form-label">Capacity</label>
                         <input name="capacity" type="number" class="form-control" id="capacity" placeholder="Enter room capacity" required />
@@ -160,7 +160,7 @@ include ('../db.php');
         <section id="add-room">
             <div class="container add-room-form">
                 <h2 class="text-center">Add New Time Slot</h2>
-                <form action="allRooms.php" method="post">
+                <form action="addTime.php" method="post">
                     <!-- Rooms -->
                     <div class="mb-3">
                         <label for="RoomID" class="form-label">select room</label>
@@ -215,7 +215,7 @@ include ('../db.php');
                     <?php
                             try
                             {
-                              $sql = "Select * from availabletimeslots as av join room on av.RoomID = room.RoomID";
+                              $sql = "Select * from room";
                               $stmt = $conn->prepare($sql);
                               $stmt->execute();
                               $results = $stmt->fetchAll();
@@ -225,8 +225,8 @@ include ('../db.php');
                               echo "Connection failed: " . $e->getMessage();
                             }
                   
-                         foreach($results as $room)
-                         {
+                         foreach($results as $room){
+                              
                     ?>
                     <!-- Room 1 -->
                     <div class="col">
@@ -234,14 +234,11 @@ include ('../db.php');
                             <div class="card-body">
                                 <h5 class="card-title">Room <?php echo $room['RoomID'] ?></h5>
                                 <p class="card-text">Capacity: <?php echo $room['capacity'] ?> | Equipment: <?php echo $room['equipment'] ?></p>
-                                <p class="card-text">Available Time: <?php echo $room['start'] . "-" . $room['end'] ?></p>
                                 <div class="room-actions">
-                                    <form action="allRooms.php" method="POST">
-                                       <input type="hidden" name="RoomID" id="RoomID" value="<?php echo $room['RoomID'] ?>">
-                                       <button name="edit" class="btn btn-primary">Edit</button>
-                                    </form>
-                                    <form action="allRooms.php" method="post">
-                                        <input type="hidden" name="ATID" id="ATID" value="<?php echo $room['ATID'] ?>">
+                        
+                                   <a href="edit.php"><button name="edit" class="btn btn-primary">Edit</button></a>
+                                    <form action="deleteRoom.php" method="post">
+                                        <input type="hidden" name="RoomID" id="RoomID" value="<?php echo $room['RoomID'] ?>">
                                         <button name="Delete" class="btn btn-danger">Delete</button>
                                     </form>
                                 </div>
@@ -258,6 +255,65 @@ include ('../db.php');
         </section>
     </div>
 
+
+    <!-- time slots section-->
+    <section id="rooms">
+            <div class="container">
+                <div class="admin-panel-header">
+                    <h2>View time slots</h2>
+                    <p>Admin can view the list of time slots in the system</p>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <?php
+                            try
+                            {
+                              $sql = "Select * from availabletimeslots as av join room on av.RoomID = room.RoomID";
+                              $stmt = $conn->prepare($sql);
+                              $stmt->execute();
+                              $results = $stmt->fetchAll();
+                  
+                            } catch(PDOException $e) 
+                            {
+                              echo "Connection failed: " . $e->getMessage();
+                            }
+                  
+                         foreach($results as $room){
+                              
+                    ?>
+                    <!-- Rooms time slots -->
+                    <div class="col">
+                        <div class="card room-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Room <?php echo $room['RoomID'] ?></h5>
+                                <p class="card-text">ATID: <?php echo $room['ATID']?></p>
+                                <p class="card-text">Capacity: <?php echo $room['capacity'] ?> | Equipment: <?php echo $room['equipment'] ?></p>
+                                <p class="card-text">Time: <?php echo $room['start'] . '-' . $room['end']?></p>
+                                <div class="room-actions">
+                        
+                                <form action="editTimeslot.php" method="post">
+                                  <input type="hidden" name="ATID" id="ATID" value="<?php echo $room['ATID'] ?>">
+                                  <button name="edit" class="btn btn-primary">Edit</button>
+                                </form>
+                                    <form action="deleteTime.php" method="post">
+                                        <input type="hidden" name="ATID" id="ATID" value="<?php echo $room['ATID'] ?>">
+                                        <button name="DeleteTime" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php
+                         }
+                    ?>
+              
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <br>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -267,63 +323,78 @@ include ('../db.php');
 
         <?php
 
-            // FUNCTIONALITY FOR ADD ROOM
-           if(isset($_POST['AddRoom']) && $_SERVER['REQUEST_METHOD'] == 'POST')
-           {
-            try
-            {
-             
-                $cap = $_POST['capacity'];
-                $equ = $_POST['equipment'];
 
-              $sql = "insert into room (capacity,equipment) values('$cap','$equ')";
-              $stmt = $conn->prepare($sql);
-              $stmt->execute();
-              echo "<script>alert('Room added succesfuly')</script>";
-              
-            } catch(PDOException $e) 
+            // Cheak if Room added sucsessfully
+            if(isset($_SESSION['AddRoom']))
             {
-              echo "<script>alert('Error in add Room')</script>";
-          
+                if($_SESSION['AddRoom'] == true)
+                {
+                  echo "<script>alert('Room added succesfuly')</script>";
+                }else
+                {
+                  echo "<script>alert('Error in add Room')</script>";
+
+                }
+
+                unset($_SESSION['AddRoom']);
             }
 
-           }
+            // Cheak if time added sucsessfully
+            if(isset($_SESSION['addTime']))
+            {
+                if($_SESSION['addTime'] == true)
+                {
+                  echo "<script>alert('Time added succesfuly')</script>";
+                }else
+                {
+                  echo "<script>alert('Error in add Time')</script>";
+                }
+
+                unset($_SESSION['addTime']);
+            }
+
+             // Cheak if Room is added sucsessfully
+             if(isset($_SESSION['deleteRoom']))
+             {
+                 if($_SESSION['deleteRoom'] == true)
+                 {
+                   echo "<script>alert('Room delete succesfuly')</script>";
+                 }else
+                 {
+                   echo "<script>alert('Error in Delete Room')</script>";
+                 }
  
-
-           // FUNCTIONALITY FOR ADD TIME SLOT
-           if(isset($_POST['AddTime']) && $_SERVER['REQUEST_METHOD'] == 'POST')
-           {
-            try
-            {
-             
-              $roomID = $_POST['RoomID'];
-              $start = $_POST['start'];
-              $end = $_POST['end'];
-              $sql = "insert into availabletimeslots (RoomID,start,end) values('$roomID','$start','$end')";
-              $stmt = $conn->prepare($sql);
-              $stmt->execute();
-              echo "<script>alert('Time added succesfuly')</script>";
-              
-            } catch(PDOException $e) 
-            {
-              echo "<script>alert('Error in add Time')</script>";
-            }
-
-           }
+                 unset($_SESSION['deleteRoom']);
+             }
 
 
-           //FUNCTIONALITY FOR DELETE ROOM
-           if(isset($_POST['Delete']) && $_SERVER['REQUEST_METHOD'] == 'POST')
+             if(isset($_SESSION['deleteTime']))
+             {
+                 if($_SESSION['deleteTime'] == true)
+                 {
+                   echo "<script>alert('Time delete succesfuly')</script>";
+                 }else
+                 {
+                   echo "<script>alert('Error in Delete Time')</script>";
+                 }
+ 
+                 unset($_SESSION['deleteTime']);
+             }
+        
+
+
+
+           if(isset($_POST['DeleteTime']) && $_SERVER['REQUEST_METHOD'] == 'POST')
            {
             try
             {
              
               $ATID = $_POST['ATID'];
-              $sql = "Delete from availabletimeslots where ATID ='$ATID'";
+              $sql = "Delete from availabletimeslots where ATID  = '$ATID'";
               $stmt = $conn->prepare($sql);
               $stmt->execute();
               echo "<script>alert('deleted succesfuly')</script>";
-              
+
             } catch(PDOException $e) 
             {
               echo "<script>alert('error in deletion')</script>";
@@ -331,7 +402,6 @@ include ('../db.php');
             }
 
            }
-
 
     
         ?>
