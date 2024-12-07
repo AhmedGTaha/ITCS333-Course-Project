@@ -4,7 +4,7 @@
       <!-- Brand Logo -->
       <a class="navbar-brand" href="Home.php">
         <img
-          src="https://incubator.uob.edu.bh/wp-content/uploads/2022/11/LOGO_Final_S-1-e1669184877957.png"
+          src="pic\uobLogo.png"
           height="30"
           alt="UOB Logo"
           loading="lazy"
@@ -47,7 +47,7 @@
             aria-expanded="false"
           >
             <img
-              src="<?php echo $_SESSION['profile_picture'] ?? 'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'; ?>"
+              src="<?php echo $_SESSION['profile_picture'] ?? 'pic\user.png'; ?>"
               class="rounded-circle"
               height="25"
               alt="Profile Avatar"

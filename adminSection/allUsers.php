@@ -184,7 +184,7 @@ include('../db.php');
               <div class="card user-card">
                 <div class="card-body text-center">
                   <img
-                    src="<?php echo $pic ?? 'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'; ?>"
+                    src="<?php echo $pic ?? 'pic\user.png'; ?>"
                     class="rounded-circle mb-3"
                     alt="User Avatar"
                   />
@@ -193,7 +193,7 @@ include('../db.php');
                   <p class="card-text">Phone: <?php echo $result['Phone'] ?></p>
                   <form action="deleteUser.php" method="post">
                     <input type="hidden" name="Email" value="<?php echo $result['Email'] ?>">
-                    <button name="deletUser" class="btn btn-danger">Delete User</button>
+                    <button name="deleteUser" class="btn btn-danger">Delete User</button>
                   </form>
                 </div>
               </div>

@@ -96,7 +96,7 @@ include("db.php");
     <div class="container my-5">
       <div class="user-card">
         <img
-          src="<?php echo $_SESSION['profile_picture'] ?? 'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'; ?>"
+          src="<?php echo $_SESSION['profile_picture'] ?? 'pic\user.png'; ?>"
           alt="User Avatar"
         />
         <h5>Hello, <?php echo $_SESSION['name']?></h5>
