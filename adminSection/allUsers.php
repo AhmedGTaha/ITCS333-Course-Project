@@ -215,24 +215,21 @@ include('../db.php');
     ></script>
 
     <?php
-
      if(isset($_SESSION['deleteUser']))
      {
       if($_SESSION['deleteUser'] == true)
       {
-        echo "<script>alert('Deleted user succesfully')</script>";
+        echo "<script>alert('User deleted successfully')</script>";
         
       }else
       {
-        echo "<script>alert('Error in add Room')</script>";
+        echo "<script>alert('Error in deleting user')</script>";
       }
          
       unset($_SESSION['deleteUser']);
      }
-  
-
-
     ?>
+
   </body>
 </html>
 

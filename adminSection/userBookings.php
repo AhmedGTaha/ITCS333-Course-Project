@@ -189,10 +189,10 @@ include ("../db.php");
     {
         if($_SESSION['deleteBook'] == true)
         {
-          echo "<script>alert('Book deleted succesfuly')</script>";
+          echo "<script>alert('Booking canceled successfully');</script>";
         }else
         {
-          echo "<script>alert('Book deleted succesfuly')</script>";
+          echo "<script>alert('Error in cancellation');</script>";
         }
 
     }
@@ -208,7 +208,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['rid']))
     $sql = "Delete from book where book.requestID ='$requestID'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
-    echo "<script>alert('Book deleted succesfuly')</script>";
+    echo "<script>alert('Booking canceled successfully');</script>";
     
   } catch(PDOException $e) 
   {
@@ -220,7 +220,3 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['rid']))
 ?>
   </body>
 </html>
-
-
-
-

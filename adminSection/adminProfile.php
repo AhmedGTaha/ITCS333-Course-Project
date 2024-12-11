@@ -145,7 +145,7 @@ include ("../db.php");
     <div class="profile-container">
       <div class="text-center mb-4">
       <img
-        src="<?php echo $_SESSION['profile_picture'] ?? 'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'; ?>"
+        src="<?php echo $_SESSION['profile_picture'] ?? 'pic\user.png'; ?>"
         alt="User Profile Picture"
         class="profile-picture"
       />
