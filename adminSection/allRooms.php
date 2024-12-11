@@ -228,7 +228,7 @@ include ('../db.php');
                          foreach($results as $room){
                               
                     ?>
-                    <!-- Room 1 -->
+                    <!-- Rooms -->
                     <div class="col">
                         <div class="card room-card">
                             <div class="card-body">
