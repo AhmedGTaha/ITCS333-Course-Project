@@ -251,6 +251,7 @@ include ('../db.php');
                 
                 </div>
             </div>
+            <br>
             <div class="container">
                 <div class="admin-panel-header">
                     <h2>View time slots</h2>
