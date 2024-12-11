@@ -96,7 +96,7 @@ include("db.php");
     <div class="container my-5">
       <div class="user-card">
         <img
-          src="<?php echo $_SESSION['profile_picture'] ?? 'pic\user.png'; ?>"
+          src="<?php echo $_SESSION['profile_picture'] ?? 'pic/user.png'; ?>"
           alt="User Avatar"
         />
         <h5>Hello, <?php echo $_SESSION['name']?></h5>
