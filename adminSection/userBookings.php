@@ -194,7 +194,7 @@ include ("../db.php");
         {
           echo "<script>alert('Error in cancellation');</script>";
         }
-
+        unset($_SESSION['deleteBook']);
     }
 
 
