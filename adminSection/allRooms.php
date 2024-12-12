@@ -227,6 +227,7 @@ include ('../db.php');
                          foreach($results as $room){
                               
                     ?>
+                    <!-- Rooms -->
                     <div class="col">
                         <div class="card room-card">
                             <div class="card-body">
@@ -250,6 +251,7 @@ include ('../db.php');
                 
                 </div>
             </div>
+            <br>
             <div class="container">
                 <div class="admin-panel-header">
                     <h2>View time slots</h2>
